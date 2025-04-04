@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2 class="mb-4">Welcome, {{ session['full_name'] }}</h2>
+
+<div class="card mb-4">
+    <div class="card-header bg-primary text-white">
+        <h5 class="mb-0">Your Anxiety Assessment History</h5>
+    </div>
+    <div class="card-body">
+        {% if tests %}
+            <div class="table-responsive">
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Date</th>
+                            <th>Total Score</th>
+                            <th>Severity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for test in tests %}
+                            <tr>
+                                <td>{{ test['test_date'] }}</td>
+                                <td>{{ test['total_score'] }}</td>
+                                <td>
+                                    {% if test['severity'] == "High/Severe Anxiety" %}
+                                        <span class="badge bg-danger">{{ test['severity'] }}</span>
+                                    {% elif test['severity'] == "Moderate Anxiety" %}
+                                        <span class="badge bg-warning text-dark">{{ test['severity'] }}</span>
+                                    {% elif test['severity'] == "Mild Anxiety" %}
+                                        <span class="badge bg-info">{{ test['severity'] }}</span>
+                                    {% else %}
+                                        <span class="badge bg-success">{{ test['severity'] }}</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        {% else %}
+            <p>You haven't taken any tests yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+<a href="{{ url_for('test') }}" class="btn btn-primary btn-lg">Take New Test</a>
+{% endblock %}

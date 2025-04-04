@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="hero-section text-center py-5 bg-light">
+    <h1 class="display-4">Beck Anxiety Inventory</h1>
+    <p class="lead">Assess your anxiety levels with our scientifically validated questionnaire</p>
+
+    {% if 'user_id' not in session %}
+        <div class="mt-4">
+            <a href="{{ url_for('register') }}" class="btn btn-primary btn-lg mx-2">Register</a>
+            <a href="{{ url_for('login') }}" class="btn btn-outline-primary btn-lg mx-2">Login</a>
+        </div>
+    {% else %}
+        <div class="mt-4">
+            <a href="{{ url_for('test') }}" class="btn btn-primary btn-lg mx-2">Take the Test</a>
+            <a href="{{ url_for('dashboard') }}" class="btn btn-outline-primary btn-lg mx-2">View Dashboard</a>
+        </div>
+    {% endif %}
+</div>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">What is BAI?</h5>
+                    <p class="card-text">The Beck Anxiety Inventory is a 21-question multiple-choice self-report inventory used for measuring the severity of anxiety.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">How it Works</h5>
+                    <p class="card-text">Answer each question honestly based on how you've been feeling over the past month, including today.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Get Insights</h5>
+                    <p class="card-text">Receive immediate feedback about your anxiety levels and personalized insights based on your responses.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

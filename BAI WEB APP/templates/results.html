@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h2 class="mb-0">Your Test Results</h2>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mb-4">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Total Score:</strong> {{ total_score }}</p>
+                        <p><strong>Top Questions Score:</strong> {{ top_questions_score }}/30</p>
+                        <p><strong>Severity:</strong>
+                            {% if severity == "High/Severe Anxiety" %}
+                                <span class="badge bg-danger">{{ severity }}</span>
+                            {% elif severity == "Moderate Anxiety" %}
+                                <span class="badge bg-warning text-dark">{{ severity }}</span>
+                            {% elif severity == "Mild Anxiety" %}
+                                <span class="badge bg-info">{{ severity }}</span>
+                            {% else %}
+                                <span class="badge bg-success">{{ severity }}</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-info text-white">
+                        <h5 class="mb-0">Interpretation</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if severity == "High/Severe Anxiety" %}
+                            <p>Your score indicates high levels of anxiety. This suggests you may be experiencing significant anxiety symptoms that could be impacting your daily life.</p>
+                            <p>Consider seeking professional help from a mental health provider to discuss these results and explore treatment options.</p>
+                        {% elif severity == "Moderate Anxiety" %}
+                            <p>Your score suggests moderate levels of anxiety. While not extremely severe, these symptoms may still be affecting your quality of life.</p>
+                            <p>You might benefit from stress management techniques or speaking with a professional about your symptoms.</p>
+                        {% elif severity == "Mild Anxiety" %}
+                            <p>Your score indicates mild anxiety symptoms. These may be manageable but could warrant attention if they persist or worsen.</p>
+                            <p>Consider practicing relaxation techniques and monitoring your symptoms.</p>
+                        {% else %}
+                            <p>Your score suggests minimal or no anxiety symptoms. This is a positive result indicating you're currently experiencing few anxiety-related issues.</p>
+                            <p>Continue to monitor your mental health and practice good self-care habits.</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center mt-4">
+            <a href="{{ url_for('dashboard') }}" class="btn btn-primary">View Dashboard</a>
+            <a href="{{ url_for('test') }}" class="btn btn-outline-primary">Take Test Again</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

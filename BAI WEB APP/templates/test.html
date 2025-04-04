@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="card">
+    <div class="card-header bg-primary text-white">
+        <h2 class="mb-0">Beck Anxiety Inventory</h2>
+    </div>
+    <div class="card-body">
+        <p class="lead">Below is a list of common symptoms of anxiety. Please carefully read each item in the list. Indicate how much you have been bothered by that symptom during the past month, including today.</p>
+
+        <form method="POST">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Symptom</th>
+                        <th>Not At All (0)</th>
+                        <th>Mildly (1)</th>
+                        <th>Moderately (2)</th>
+                        <th>Severely (3)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for question in questions %}
+                    <tr>
+                        <td>{{ question }}</td>
+                        <td><input type="radio" name="{{ question }}" value="0" required></td>
+                        <td><input type="radio" name="{{ question }}" value="1"></td>
+                        <td><input type="radio" name="{{ question }}" value="2"></td>
+                        <td><input type="radio" name="{{ question }}" value="3"></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+            <div class="text-center mt-4">
+                <button type="submit" class="btn btn-primary btn-lg">Submit Test</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
